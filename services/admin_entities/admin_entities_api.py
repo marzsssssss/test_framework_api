@@ -1,5 +1,4 @@
 import allure
-import pytest
 
 from utils.helper import Helper
 from services.admin_entities.endpoints import Endpoints
