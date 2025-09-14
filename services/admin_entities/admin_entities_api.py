@@ -1,4 +1,3 @@
-import httpx
 import allure
 import pytest
 
@@ -11,18 +10,18 @@ from models.admin_entities_model import GetEntitiesModel
 
 
 class AdminEntitiesAPI(Helper):
-    def __init__(self):
+    def __init__(self, client):
         super().__init__()
         self.endpoints = Endpoints()
         self.headers = Headers()
         self.payloads = Payloads()
-        self.client = httpx.AsyncClient(headers = self.headers.basic)
+        self.client = client
 
     @allure.step('Admin - Get Entities Accounts List')  
-    @pytest.mark.asyncio  
     async def get_entities_accounts_list(self,name):
         response = await self.client.get(
             url = self.endpoints.get_entities_accounts_list(name),
+            headers = self.headers.basic
         )
         self.assert_response(response)
         model = GetEntitiesModel(**response.json())
@@ -30,10 +29,10 @@ class AdminEntitiesAPI(Helper):
         return model
     
     @allure.step('Admin - POST Entities Accounts adjust balance')  
-    @pytest.mark.asyncio 
     async def post_entities_accouts_adjust_balance(self, get_ewallet_id):
         response = await self.client.post(
             url = self.endpoints.post_entities_accouts_adjust_balance,
+            headers = self.headers.basic,
             json = self.payloads.adjust_balance(get_ewallet_id)
         )
         self.assert_create_response(response)

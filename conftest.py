@@ -11,8 +11,10 @@ load_dotenv()
 
 @pytest_asyncio.fixture()
 async def base():
-    base = BaseTest()
-    return base
+    htx = httpx.AsyncClient()
+    client = BaseTest(htx)
+    yield client
+    await htx.aclose()
 
 # Только если запуск локальная перезаписать .env 
 @pytest_asyncio.fixture(scope='session', autouse=True)
@@ -31,7 +33,7 @@ async def init_tokens():
     return response
 
 
-@pytest_asyncio.fixture()
+@pytest_asyncio.fixture(scope='session')
 async def get_currency_id():
     async with httpx.AsyncClient(headers = Headers().basic) as client:
         response = await client.get(
@@ -40,11 +42,11 @@ async def get_currency_id():
     assert response.status_code == 200, f"Failed requests {response.text}"
 
     currencies = response.json()
-    cur_eur = next((c for c in currencies if c.get('code') == 'EUR'), None)
-    assert cur_eur is not None, "Currency with code 'EUR' not found "
-    return cur_eur['id']
+    cur_jpy = next((c for c in currencies if c.get('code') == 'JPY'), None)
+    assert cur_jpy is not None, "Currency with code 'EUR' not found "
+    return cur_jpy['id']
 
-@pytest_asyncio.fixture()
+@pytest_asyncio.fixture(scope='session')
 async def get_ewallet_id():
     async with httpx.AsyncClient(headers = Headers().basic) as client:
         response = await client.get(

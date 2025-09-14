@@ -1,4 +1,3 @@
-import httpx
 import allure 
 import pytest
 
@@ -16,15 +15,14 @@ from models.accounts_model import (
 
 class AccountsAPI(Helper):
 
-    def __init__(self):
+    def __init__(self, client):
         super().__init__()
         self.endpoints = Endpoints()
         self.headers = Headers()
         self.payloads = Payloads()
-        self.client = httpx.AsyncClient(headers= self.headers.basic)
+        self.client = client
 
     @allure.step('Total Amount User')
-    @pytest.mark.asyncio
     async def total_amount(self, currency_id):
         response = await self.client.get(
             url = self.endpoints.total_amount(currency_id),
@@ -36,7 +34,6 @@ class AccountsAPI(Helper):
         return model
         
     @allure.step('Get Accounts Ewallet')
-    @pytest.mark.asyncio
     async def get_accounts_ewallet(self):
         response = await self.client.get(
             url = self.endpoints.get_accounts_ewallet,
@@ -48,7 +45,6 @@ class AccountsAPI(Helper):
         return model
     
     @allure.step('Get Ewallet Currencies')
-    @pytest.mark.asyncio
     async def get_ewallet_currencies(self):
         response = await self.client.get(
             url = self.endpoints.get_ewallet_currencies,
@@ -61,7 +57,6 @@ class AccountsAPI(Helper):
         return model
 
     @allure.step('Get Entity Ewallets')
-    @pytest.mark.asyncio
     async def get_entity_ewallets(self,currency_id):
         response = await self.client.get(
             url = self.endpoints.get_entity_ewallets(currency_id),
@@ -73,7 +68,6 @@ class AccountsAPI(Helper):
         return model
     
     @allure.step('Create Entity Ewallet')
-    @pytest.mark.asyncio
     async def create_entity_ewallet(self, currency_id):
         response = await self.client.post(
             url=self.endpoints.create_entity_ewallet,
@@ -85,5 +79,3 @@ class AccountsAPI(Helper):
         self.attach_response_to_allure(response)
         return model
     
-    async def close(self):
-        await self.client.aclose()

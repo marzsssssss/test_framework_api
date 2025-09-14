@@ -1,4 +1,4 @@
-import pytest
+import httpx
 
 from services.accounts.accounts_api import AccountsAPI
 from services.accounts.accounts_api_negative import AccountsNegativeAPI
@@ -8,9 +8,9 @@ from core.logger import Logger
 
 class BaseTest:
 
-    def __init__(self):
+    def __init__(self, client):
         self.logger = Logger('Base Test')
-        self.accounts_api = AccountsAPI()
-        self.accounts_api_negative = AccountsNegativeAPI()
-        self.admin_entities_api = AdminEntitiesAPI()
-        self.admin_entities_api_negative = AdminEntitiesNegative()
+        self.accounts_api = AccountsAPI(client)
+        self.accounts_api_negative = AccountsNegativeAPI(client)
+        self.admin_entities_api = AdminEntitiesAPI(client)
+        self.admin_entities_api_negative = AdminEntitiesNegative(client)
