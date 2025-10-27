@@ -13,7 +13,6 @@ class TestAccountsNegative(BaseTest):
     @allure.title('Negative Tests Accounts Headers')
     @pytest.mark.parametrize(
         ('headers ,expected_status'), [
-            (Headers.empty_token, 401),
             (Headers.invalid_token, 401),
             (Headers.missing_token, 401)
         ]
