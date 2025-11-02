@@ -19,7 +19,7 @@ pytest tests/accounts/test_accounts_negative.py
 ```
 Start Allure Report
 ```sh
-pytest tests/accounts/test_accounts_negativ.py --alluredir=reports/allure
+pytest tests/accounts/test_accounts_negative.py --alluredir=reports/allure
 ```
 
 Up Allure Server

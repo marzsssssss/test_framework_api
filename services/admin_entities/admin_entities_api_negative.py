@@ -23,7 +23,7 @@ class AdminEntitiesNegative(Helper):
     @allure.step('POST- /admin/entities/accounts/adjust-balance Negative')
     async def post_entities_accounts_adjust(self, json, headers, expected_status):
         response = await self.client.post(
-            url = self.endpoints.post_entities_accouts_adjust_balance,
+            url = self.endpoints.post_entities_accounts_adjust_balance,
             headers = headers,
             json = json
         )

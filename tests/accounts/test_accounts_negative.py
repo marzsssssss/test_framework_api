@@ -23,7 +23,7 @@ class TestAccountsNegative():
         base.logger.get().info(f'Test launch Negative Headers  - POST /accounts/ewallets/, headers -  {headers} - expected status - {expected_status}')
         await base.accounts_api_negative.create_entity_ewallet(headers, expected_status, get_currency_id) 
         base.logger.get().info(f'Test launch Negative Headers  - GET  /accounts/ewallets/, headers -  {headers} - expected status - {expected_status}')
-        await base.accounts_api_negative.get_accounts_ewallet_negativ(headers,expected_status)
+        await base.accounts_api_negative.get_accounts_ewallet_negative(headers,expected_status)
         base.logger.get().info(f'Test launch Negative Headers  - GET /accounts/ewallets/currencies/, headers -  {headers} - expected status - {expected_status}')
         await base.accounts_api_negative.get_ewallet_currencies(headers, expected_status)
         base.logger.get().info(f'Test launch Negative Headers  - GET /accounts/ewallets/{get_ewallet_id}/, headers -  {headers} - expected status - {expected_status}')

@@ -28,9 +28,9 @@ class AdminEntitiesAPI(Helper):
         return model
     
     @allure.step('Admin - POST Entities Accounts adjust balance')  
-    async def post_entities_accouts_adjust_balance(self, get_ewallet_id):
+    async def post_entities_accounts_adjust_balance(self, get_ewallet_id):
         response = await self.client.post(
-            url = self.endpoints.post_entities_accouts_adjust_balance,
+            url = self.endpoints.post_entities_accounts_adjust_balance,
             headers = self.headers.basic,
             json = self.payloads.adjust_balance(get_ewallet_id)
         )

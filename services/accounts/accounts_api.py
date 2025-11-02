@@ -1,5 +1,4 @@
-import allure 
-import pytest
+import allure
 
 from utils.helper import Helper 
 from services.accounts.endpoints import Endpoints

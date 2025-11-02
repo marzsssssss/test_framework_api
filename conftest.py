@@ -43,7 +43,7 @@ async def get_currency_id():
 
     currencies = response.json()
     cur_jpy = next((c for c in currencies if c.get('code') == 'JPY'), None)
-    assert cur_jpy is not None, "Currency with code 'EUR' not found "
+    assert cur_jpy is not None, "Currency with code 'JPY' not found "
     return cur_jpy['id']
 
 @pytest_asyncio.fixture(scope='session')

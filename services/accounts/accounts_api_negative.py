@@ -20,7 +20,7 @@ class AccountsNegativeAPI(Helper):
         self.attach_response_to_allure(response)
         
     @allure.step('Get Accounts Ewallet Negative')
-    async def get_accounts_ewallet_negativ(self, headers, expected_status):
+    async def get_accounts_ewallet_negative(self, headers, expected_status):
         response = await self.client.get(
             url = self.endpoints.get_accounts_ewallet,
             headers=headers

@@ -13,6 +13,7 @@ from models.admin_invoices.invoices_withdrawal_model import InvoicesWithdrawalMo
 class AdminInvoicesAPI(Helper):
 
     def __init__(self, client):
+        super().__init__()
         self.headers = Headers()
         self.endpoints = Endpoints()
         self.client = client
